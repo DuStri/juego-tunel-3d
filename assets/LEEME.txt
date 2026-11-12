@@ -1,0 +1,27 @@
+RECURSOS DEL JUEGO
+==================
+
+Guarda aquí los archivos que quieras usar para personalizar el juego.
+Luego dile a Claude qué has puesto y los conecta.
+
+modelos/    Modelos 3D. Formato: .glb (un solo archivo, con texturas incluidas).
+            Nombres sugeridos:
+              nave.glb        la nave del jugador
+              asteroide.glb   un asteroide (se repite y gira para formar los campos)
+              moneda.glb      el objeto que se recoge (opcional)
+            Mejor modelos "low poly" (pocos polígonos) y de menos de 2-3 MB.
+
+imagenes/   Imágenes. Formato: .png o .jpg.
+              fondo.jpg       fondo espacial (ideal 2048x1024 o mayor)
+              Texturas para paredes o barreras, logotipo, etc.
+
+sonidos/    Sonidos. Formato: .mp3 u .ogg.
+              disparo, acierto, choque, moneda, pulso, y una música de fondo.
+
+DÓNDE ENCONTRARLOS (gratis y de uso libre, licencia CC0)
+  kenney.nl         -> "Space Kit" (naves, asteroides) y packs de sonido
+  quaternius.com    -> packs de naves y espacio
+  poly.pizza        -> buscador de modelos low poly (mira la licencia de cada uno)
+  freesound.org     -> sonidos (filtra por licencia "Creative Commons 0")
+
+Comprueba siempre la licencia antes de descargar.

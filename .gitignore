@@ -1,0 +1,6 @@
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Packs originales descargados: el juego no los usa y pesan mucho
+assets/modelos/*.zip

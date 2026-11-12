@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Llave — dispara para abrir el camino</title>
+  <style>
+    /* El juego ocupa toda la ventana. Ocultamos el cursor normal:
+       en su lugar se ve la mira (#mira). */
+    html, body { margin: 0; height: 100%; overflow: hidden; background: #05060c; cursor: none; }
+    canvas { display: block; }
+
+    /* HUD: elementos HTML colocados encima del lienzo 3D.
+       pointer-events: none hace que los clics los "atraviesen". */
+    .hud {
+      position: fixed;
+      font-family: monospace;
+      color: #ffffff;
+      pointer-events: none;
+      user-select: none;
+    }
+    #info { top: 14px; left: 18px; font-size: 20px; }
+    #mensaje {
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 26px;
+      text-align: center;
+      white-space: pre-line;      /* respeta los saltos de línea del texto */
+      text-shadow: 0 0 12px #000;
+    }
+    /* Destello rojo a pantalla completa al chocar */
+    #destello {
+      inset: 0;
+      background: #ff2244;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    /* Barra de la habilidad especial, abajo en el centro */
+    #habilidad {
+      bottom: 22px; left: 50%;
+      transform: translateX(-50%);
+      width: 260px;
+      font-size: 14px;
+      text-align: center;
+      opacity: 0.75;
+    }
+    #habilidad-marco {
+      margin-top: 6px;
+      height: 10px;
+      border: 2px solid #ffffff;
+    }
+    #habilidad-barra { height: 100%; width: 0; background: #7a8cb8; }
+    /* Llena: brilla para avisar de que se puede usar */
+    #habilidad.lista { opacity: 1; color: #4de3ff; }
+    #habilidad.lista #habilidad-marco { border-color: #4de3ff; box-shadow: 0 0 12px #4de3ff; }
+    #habilidad.lista #habilidad-barra { background: #4de3ff; }
+
+    /* Mira: una cruz con hueco en el centro, hecha con dos barras
+       (los pseudo-elementos ::before y ::after) y un punto central. */
+    #mira {
+      left: 50%; top: 50%;
+      width: 30px; height: 30px;
+      transform: translate(-50%, -50%);
+      transition: transform 0.05s;
+    }
+    #mira::before, #mira::after {
+      content: '';
+      position: absolute;
+      background: #ffffff;
+    }
+    /* Barra horizontal y vertical; el degradado deja un hueco en el centro */
+    #mira::before {
+      left: 0; right: 0; top: 14px; height: 2px;
+      background: linear-gradient(to right, #fff 0 9px, transparent 9px 21px, #fff 21px 30px);
+    }
+    #mira::after {
+      top: 0; bottom: 0; left: 14px; width: 2px;
+      background: linear-gradient(to bottom, #fff 0 9px, transparent 9px 21px, #fff 21px 30px);
+    }
+    /* Marca de acierto: la cruz gira a forma de X, crece y se pone roja */
+    #mira.acierto { transform: translate(-50%, -50%) rotate(45deg) scale(1.4); }
+    #mira.acierto::before {
+      background: linear-gradient(to right, #ff4455 0 9px, transparent 9px 21px, #ff4455 21px 30px);
+    }
+    #mira.acierto::after {
+      background: linear-gradient(to bottom, #ff4455 0 9px, transparent 9px 21px, #ff4455 21px 30px);
+    }
+  </style>
+</head>
+<body>
+  <div id="destello" class="hud"></div>
+  <div id="habilidad" class="hud">
+    TAB · PULSO DESTRUCTOR
+    <div id="habilidad-marco"><div id="habilidad-barra"></div></div>
+  </div>
+  <div id="info" class="hud"></div>
+  <div id="mensaje" class="hud"></div>
+  <div id="mira" class="hud"></div>
+
+  <!-- El orden importa: primero Three.js, luego configuración y piezas,
+       y al final juego.js, que lo arranca todo. -->
+  <script src="lib/three.min.js"></script>
+  <script src="lib/GLTFLoader.js"></script>
+  <script src="src/config.js"></script>
+  <script src="src/recursos.js"></script>
+  <script src="src/niveles.js"></script>
+  <script src="src/tunel.js"></script>
+  <script src="src/barrera.js"></script>
+  <script src="src/obstaculo.js"></script>
+  <script src="src/moneda.js"></script>
+  <script src="src/avatar.js"></script>
+  <script src="src/juego.js"></script>
+</body>
+</html>
